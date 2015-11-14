@@ -2,7 +2,9 @@ FROM python:${PYTHON_VERSION}
 
 COPY test_project/requirements.txt /app/requirements.txt
 WORKDIR /app/
-RUN pip install -r requirements.txt Django==${DJANGO_VERSION}
+RUN pip install -r requirements.txt
+
+RUN pip install Django==${DJANGO_VERSION}
 
 COPY . /externalliveserver
 RUN pip install -e /externalliveserver
