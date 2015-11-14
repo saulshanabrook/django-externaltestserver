@@ -7,7 +7,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    name='externaltestserver',
+    name='django-externaltestserver',
     version='0.0.0',
     description='Run your Django selenium tests against an external server',
     long_description=open('README.md').read(),
