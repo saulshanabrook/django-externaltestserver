@@ -1,5 +1,5 @@
 # `django-externaltestserver`
-[![PyPI](https://img.shields.io/pypi/v/https://pypi.python.org/pypi/django-externaltestserver.svg?style=flat-square)](https://pypi.python.org/pypi/django-externaltestserver)
+[![PyPI Version](https://img.shields.io/pypi/v/https://pypi.python.org/pypi/django-externaltestserver.svg?style=flat-square)]![PyPI Python Versions](https://img.shields.io/pypi/pyversions/django-externaltestserver.svg?style=flat-square)(https://pypi.python.org/pypi/django-externaltestserver)
 [![Travis branch](https://img.shields.io/travis/saulshanabrook/django-externaltestserver/master.svg?style=flat-square)](https://travis-ci.org/saulshanabrook/django-externaltestserver)
 
 <!-- MarkdownTOC depth=0 -->
@@ -177,7 +177,13 @@ Then you can run all the tests with `docker-compose run test`.
 
 ## Development
 
-To run tests:
+First choose what python and django versions you wanna test on:
+
+```bash
+sed -e 's/${PYTHON_VERSION}/3.5/g' -e 's/${DJANGO_VERSION}/1.8/g' Dockerfile.tmpl  > Dockerfile
+```
+
+Then run the tests:
 
 ```bash
 docker-compose run test
