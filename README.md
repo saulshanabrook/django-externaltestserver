@@ -2,6 +2,16 @@
 [![PyPI Version](https://img.shields.io/pypi/v/django-externaltestserver.svg?style=flat-square)![PyPI Python Versions](https://img.shields.io/pypi/pyversions/django-externaltestserver.svg?style=flat-square)](https://pypi.python.org/pypi/django-externaltestserver)
 [![Travis branch](https://img.shields.io/travis/saulshanabrook/django-externaltestserver/master.svg?style=flat-square)](https://travis-ci.org/saulshanabrook/django-externaltestserver)
 
+## What?
+
+Allows you to easily run selenium tests against an external server. This comes
+in two. The first is a drop in replacement for
+[`LiveServerTestCase`](https://docs.djangoproject.com/en/1.8/topics/testing/tools/#liveservertestcase)
+that will not start a server in the background.
+
+The second is the `testserver` management command which allows you to run
+a Django server in a seperate process.
+
 ## How?
 1. `pip install django-externaltestserver`.
 2. Set `EXTERNAL_TEST_SERVER` in your settings
