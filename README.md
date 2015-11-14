@@ -48,7 +48,7 @@ container needs to access the testing container, in order to hit the server.
 
 ![diagram of old process](./images/old.jpg)
 
-We might hope we could represent this relation this in our `docker-compose.yml`
+You might think we could represent this in our `docker-compose.yml`:
 
 ```yaml
 db:
@@ -97,20 +97,19 @@ This stopped working with Docker Compose 1.5.0 / Docker 1.9.0 with
 
 #### Solution
 
-The simplist solution to me seemed to be to break up the test command into
-two seperate Docker containers. One would handle serving the server, the other
-would just run the tests.
+Instead we break up the test command into
+two seperate Docker containers. One handles serving the app, the other just runs the tests.
 
 ![diagram of new process](./images/new.jpg)
 
-That way there are no cyclical dependencies.
+This way there are no cyclical dependencies.
 
 ```yaml
 db:
     image: postgres:9.5
 test:
     build: .
-    # sleep for https://github.com/docker/compose/issues/374#issuecomment-156546513
+    # sleep because https://github.com/docker/compose/issues/374#issuecomment-156546513
     command: bash -c "sleep 5; python manage.py test --keepdb"
     links:
         - db
@@ -124,7 +123,7 @@ selenium:
         - testserver
 testserver:
     build: .
-    # sleep for https://github.com/docker/compose/issues/374#issuecomment-156546513
+    # sleep because https://github.com/docker/compose/issues/374#issuecomment-156546513
     command: bash -c "sleep 5; python manage.py testserver 8000 --static"
     expose:
       - "8000"
@@ -133,7 +132,7 @@ testserver:
 
 ```
 
-Then just make sure we are picking up the host in the settings:
+Then we just tell our external live tests to use the other container :
 
 ```python
 # settings.py
@@ -142,7 +141,7 @@ import os
 EXTERNAL_TEST_SERVER = os.environ.get('EXTERNAL_TEST_SERVER', None)
 ```
 
-And that your tests are inheriting from `externaltestserver.ExternalLiveServerTestCase`
+And make sure we are  `externaltestserver.ExternalLiveServerTestCase`
 and accesing the right selenium server:
 
 ```python
@@ -165,11 +164,12 @@ class IntegrationTest(ExternalLiveServerTestCase):
 
     def test_item_count(self):
         Item.objects.create()
+        # here self.live_server_url == settings.conf.EXTERNAL_TEST_SERVER == "http://testserver:8000/"
         self.browser.get(self.live_server_url)
         self.assertIn("1", self.browser.page_source)
 ```
 
-Then you can run all the tests with `docker-compose run test`.
+Then we can run all the tests simply with `docker-compose run test`.
 
 
 ## Development
