@@ -2,19 +2,6 @@
 [![PyPI Version](https://img.shields.io/pypi/v/https://pypi.python.org/pypi/django-externaltestserver.svg?style=flat-square)![PyPI Python Versions](https://img.shields.io/pypi/pyversions/django-externaltestserver.svg?style=flat-square)](https://pypi.python.org/pypi/django-externaltestserver)
 [![Travis branch](https://img.shields.io/travis/saulshanabrook/django-externaltestserver/master.svg?style=flat-square)](https://travis-ci.org/saulshanabrook/django-externaltestserver)
 
-<!-- MarkdownTOC depth=0 autolink=true -->
-
-- [How?][how]
-- [Why?][why]
-    - [External Server][external-server]
-    - [Docker][docker]
-        - [Problem][problem]
-        - [Solution][solution]
-- [Development][development]
-
-<!-- /MarkdownTOC -->
-
-
 ## How?
 1. `pip install django-externaltestserver`.
 2. Set `EXTERNAL_TEST_SERVER` in your settings
