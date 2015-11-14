@@ -9,7 +9,7 @@ in two. The first is a drop in replacement for
 [`LiveServerTestCase`](https://docs.djangoproject.com/en/1.8/topics/testing/tools/#liveservertestcase)
 that will not start a server in the background.
 
-The second is the `testserver` management command which allows you to run
+The second is the `livetestserver` management command which allows you to run
 a Django server in a seperate process.
 
 ## How?
@@ -19,7 +19,7 @@ a Django server in a seperate process.
    `externaltestserver.ExternalLiveServerTestCase` instead of
    `LiveServerTestCase`.
 4. (optional) Add `externaltestserver` to `INSTALLED_APPS` to run
-   `python manage.py testserver <port> [--static]` in another process.
+   `python manage.py livetestserver <port> [--static]` in another process.
 
 ## Why?
 
@@ -115,16 +115,16 @@ test:
         - db
         - selenium
     environment:
-        - EXTERNAL_TEST_SERVER=http://testserver:8000/
+        - EXTERNAL_TEST_SERVER=http://livetestserver:8000/
         - SELENIUM_HOST=http://selenium:4444/wd/hub
 selenium:
     image: selenium/standalone-chrome:2.48.2
     links:
-        - testserver
-testserver:
+        - livetestserver
+livetestserver:
     build: .
     # sleep because https://github.com/docker/compose/issues/374#issuecomment-156546513
-    command: bash -c "sleep 5; python manage.py testserver 8000 --static"
+    command: bash -c "sleep 5; python manage.py livetestserver 8000 --static"
     expose:
       - "8000"
     links:

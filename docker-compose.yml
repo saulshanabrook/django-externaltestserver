@@ -7,15 +7,15 @@ test:
         - db
         - selenium
     environment:
-        - EXTERNAL_TEST_SERVER=http://testserver:8000/
+        - EXTERNAL_TEST_SERVER=http://livetestserver:8000/
         - SELENIUM_HOST=http://selenium:4444/wd/hub
 selenium:
     image: selenium/standalone-chrome:2.48.2
     links:
-        - testserver
-testserver:
+        - livetestserver
+livetestserver:
     build: .
-    command: bash -c "sleep 5; python manage.py testserver 8000 --static"
+    command: bash -c "sleep 5; python manage.py livetestserver 8000 --static"
     expose:
         - "8000"
     links:
