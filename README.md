@@ -2,8 +2,6 @@
 [![PyPI](https://img.shields.io/pypi/v/https://pypi.python.org/pypi/django-externaltestserver.svg?style=flat-square)](https://pypi.python.org/pypi/django-externaltestserver)
 [![Travis branch](https://img.shields.io/travis/saulshanabrook/django-externaltestserver/master.svg?style=flat-square)](https://travis-ci.org/saulshanabrook/django-externaltestserver)
 
-*Run your Django selenium tests against an external server*
-
 <!-- MarkdownTOC depth=0 -->
 
 - How?
