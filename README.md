@@ -193,6 +193,7 @@ docker-compose run test
 To deploy a new version:
 
 ```
+# change version in setup.py
 python setup.py publish
 git tag <version number>
 git push --tags

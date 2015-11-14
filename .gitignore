@@ -3,3 +3,5 @@
 *.pyc
 Dockerfile
 *egg-info*
+build/*
+dist/*
