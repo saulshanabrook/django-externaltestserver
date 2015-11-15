@@ -24,7 +24,6 @@ setup(
     name='django-externaltestserver',
     version='0.2.0',
     description='Run your Django selenium tests against an external server',
-    long_description=open('README.md').read(),
     author='Saul Shanabrook',
     author_email='s.shanabrook@gmail.com',
     url='https://github.com/saulshanabrook/django-externaltestserver',
