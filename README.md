@@ -110,7 +110,7 @@ db:
 test:
     build: .
     # sleep because https://github.com/docker/compose/issues/374#issuecomment-156546513
-    command: bash -c "sleep 5; python manage.py test --keepdb"
+    command: bash -c "sleep 10; python manage.py test --keepdb"
     links:
         - db
         - selenium
@@ -124,7 +124,7 @@ selenium:
 livetestserver:
     build: .
     # sleep because https://github.com/docker/compose/issues/374#issuecomment-156546513
-    command: bash -c "sleep 5; python manage.py livetestserver 8000 --static"
+    command: bash -c "sleep 10; python manage.py livetestserver 8000 --static"
     expose:
       - "8000"
     links:
