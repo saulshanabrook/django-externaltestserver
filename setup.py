@@ -3,11 +3,8 @@
 import os
 import sys
 
+from setuptools import setup, find_packages
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
 
 if sys.argv[-1] == 'publish':
     try:
@@ -22,14 +19,12 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='django-externaltestserver',
-    version='0.2.2',
+    version='0.2.3',
     description='Run your Django selenium tests against an external server',
     author='Saul Shanabrook',
     author_email='s.shanabrook@gmail.com',
     url='https://github.com/saulshanabrook/django-externaltestserver',
-    packages=[
-        'externaltestserver',
-    ],
+    packages=find_packages(),
     include_package_data=True,
     install_requires=[
     ],
