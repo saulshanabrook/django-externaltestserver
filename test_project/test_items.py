@@ -26,5 +26,5 @@ class IntegrationTest(ExternalLiveServerTestCase):
         self.assertIn("2", self.browser.page_source)
 
     def test_static_file(self):
-        self.browser.get(self.live_server_url + 'static/items/test.txt')
+        self.browser.get(self.live_server_url + '/static/items/test.txt')
         self.assertIn("test", self.browser.page_source)

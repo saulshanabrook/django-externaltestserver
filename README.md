@@ -115,7 +115,7 @@ test:
         - db
         - selenium
     environment:
-        - EXTERNAL_TEST_SERVER=http://livetestserver:8000/
+        - EXTERNAL_TEST_SERVER=http://livetestserver:8000
         - SELENIUM_HOST=http://selenium:4444/wd/hub
 selenium:
     image: selenium/standalone-chrome:2.48.2
