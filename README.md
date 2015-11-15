@@ -129,6 +129,8 @@ livetestserver:
       - "8000"
     links:
         - db
+    environment:
+        - PYTHONUNBUFFERED=1
 
 ```
 

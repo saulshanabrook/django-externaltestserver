@@ -19,15 +19,22 @@ class Command(BaseCommand):
             help='Transperently serve staticfiles assets')
 
     def handle(self, *args, **options):
+        self.stdout.write('Setting up test databases....')
+
         setup_databases(
             verbosity=0,
             interactive=False,
             keepdb=True,
         )
+        host = "0.0.0.0"
+        port = options["port"]
         lst = LiveServerThread(
-            host="0.0.0.0",
-            possible_ports=[options["port"]],
+            host=host,
+            possible_ports=[port],
             static_handler=options['static_handler']
+        )
+        self.stdout.write(
+            'Starting live server on http://%s:%s...' % (host, port)
         )
         lst.run()
         raise lst.error
