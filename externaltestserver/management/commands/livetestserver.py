@@ -24,7 +24,6 @@ class Command(BaseCommand):
             interactive=False,
             keepdb=True,
         )
-        print("before")
         lst = LiveServerThread(
             host="0.0.0.0",
             possible_ports=[options["port"]],
