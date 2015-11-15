@@ -33,7 +33,24 @@ setting to our staging server (like `http://magicapp-staging.herokuapp.com/`)
 and make sure our integration tests inherit from `externaltestserver.ExternalLiveServerTestCase`
 so that they get the correct `live_server_url`.
 
+Also, if we are accessing the database in our tests, we need to make sure
+that it is connected to the same database that is serving the site. I found
+it easiest to just set `DATABASE_URL` for the command running the tests
+to the database that is also running the server. My settings would pick
+this up as the default databse. Then I just told Django to use this same
+Database for testing, and not create a new one.
 
+```python
+# settings.py
+DATABASES = {
+    'default': dj_database_url.config(
+        env=os.environ.get('DATABASE_URL_VAR', 'DATABASE_URL')
+    )
+}
+
+if os.getenv('TEST_USE_REGULAR_DB', False):
+    DATABASES['default']['TEST'] = {'NAME': DATABASES['default']['NAME']}
+```
 ### Docker
 
 #### Problem
