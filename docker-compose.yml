@@ -2,7 +2,13 @@ db:
     image: postgres:9.5
 test:
     build: .
-    command: bash -c "sleep 5; python manage.py test"
+    command: >
+        bash -c "
+            while ! (echo > /dev/tcp/db/5432) >/dev/null 2>&1;
+                do sleep 1;
+            done;
+            python manage.py test --keepdb
+        "
     links:
         - db
         - selenium
