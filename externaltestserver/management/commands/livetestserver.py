@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.test.testcases import LiveServerThread
 from django.contrib.staticfiles.handlers import StaticFilesHandler
-from django.test.runner import setup_databases
 
 
 class Command(BaseCommand):
@@ -19,13 +18,6 @@ class Command(BaseCommand):
             help='Transperently serve staticfiles assets')
 
     def handle(self, *args, **options):
-        self.stdout.write('Setting up test databases....')
-
-        setup_databases(
-            verbosity=0,
-            interactive=False,
-            keepdb=True,
-        )
         host = "0.0.0.0"
         port = options["port"]
         lst = LiveServerThread(
