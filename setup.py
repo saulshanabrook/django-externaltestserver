@@ -19,7 +19,7 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='django-externaltestserver',
-    version='0.2.4',
+    version='0.2.5',
     description='Run your Django selenium tests against an external server',
     author='Saul Shanabrook',
     author_email='s.shanabrook@gmail.com',
