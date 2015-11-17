@@ -20,6 +20,11 @@ a Django server in a seperate process.
    `LiveServerTestCase`.
 4. (optional) Add `externaltestserver` to `INSTALLED_APPS` to run
    `python manage.py livetestserver <port> [--static]` in another process.
+   Note: This command uses the `default` database. By default, Django will
+   create a new database for tests. You must tell Django, when running
+   this command to use the name of the test database explicitly. By default
+   the test database is just `test_<old database name>`, with the normal
+   connection settings.
 
 ## Why?
 
@@ -127,27 +132,28 @@ db:
 test:
     build: .
     # sleep because https://github.com/docker/compose/issues/374#issuecomment-156546513
-    command: bash -c "sleep 10; python manage.py test --keepdb"
+    command: bash -c "sleep 5; python manage.py test"
     links:
         - db
         - selenium
     environment:
         - EXTERNAL_TEST_SERVER=http://livetestserver:8000
         - SELENIUM_HOST=http://selenium:4444/wd/hub
+        - DATABASE_URL=postgres://postgres@db:5432/postgres
 selenium:
     image: selenium/standalone-chrome:2.48.2
     links:
         - livetestserver
 livetestserver:
     build: .
-    # sleep because https://github.com/docker/compose/issues/374#issuecomment-156546513
-    command: bash -c "sleep 10; python manage.py livetestserver 8000 --static"
+    command: python manage.py livetestserver 8000 --static
     expose:
       - "8000"
     links:
         - db
     environment:
         - PYTHONUNBUFFERED=1
+        - DATABASE_URL=postgres://postgres@db:5432/test_postgres
 
 ```
 

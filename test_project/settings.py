@@ -1,16 +1,9 @@
 import os
 
+import dj_database_url
+
 ROOT_URLCONF = "items.urls"
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
-}
+DATABASES = {'default': dj_database_url.config()}
 DEBUG = TEMPLATE_DEBUG = True
 
 EXTERNAL_TEST_SERVER = os.environ.get('EXTERNAL_TEST_SERVER', None)
