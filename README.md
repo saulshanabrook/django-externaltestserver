@@ -131,8 +131,16 @@ db:
     image: postgres:9.5
 test:
     build: .
-    # sleep because https://github.com/docker/compose/issues/374#issuecomment-156546513
-    command: bash -c "sleep 5; python manage.py test"
+    # wait for db to come up before starting tests, as shown in https://github.com/docker/compose/issues/374#issuecomment-126312313
+    # uses bash instead of netcat, because netcat is less likely to be installed
+    # strategy from http://superuser.com/a/806331/98716
+    command: >
+        bash -c "
+            while ! (echo > /dev/tcp/db/5432) >/dev/null 2>&1;
+                do sleep 1;
+            done;
+            python manage.py test --keepdb
+        "
     links:
         - db
         - selenium
